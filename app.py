@@ -23,11 +23,11 @@ app.add_middleware(
 
 # Cargar modelo (NO entrenar en Render)
 try:
-    print("🧠 Cargando modelo pre-entrenado...")
+    print(" Cargando modelo pre-entrenado...")
     modelo = keras.models.load_model('modelo_digitos.h5')
-    print("✅ Modelo cargado exitosamente!")
+    print(" Modelo cargado exitosamente!")
 except Exception as e:
-    print(f"❌ Error cargando modelo: {e}")
+    print(f" Error cargando modelo: {e}")
     # Crear modelo dummy para evitar crash (solo para desarrollo)
     from tensorflow.keras import layers
     modelo = keras.Sequential([
