@@ -12,7 +12,6 @@ import os
 
 app = FastAPI()
 
-# Configurar CORS para Render
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -21,14 +20,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Cargar modelo (NO entrenar en Render)
 try:
     print(" Cargando modelo pre-entrenado...")
     modelo = keras.models.load_model('modelo_digitos.h5')
     print(" Modelo cargado exitosamente!")
 except Exception as e:
     print(f" Error cargando modelo: {e}")
-    # Crear modelo dummy para evitar crash (solo para desarrollo)
     from tensorflow.keras import layers
     modelo = keras.Sequential([
         layers.Dense(10, activation='softmax', input_shape=(784,))
@@ -57,7 +54,7 @@ def predecir_digito(imagen):
         return int(np.argmax(predicciones[0]))
     except Exception as e:
         print(f"Error en predicción: {e}")
-        return 0  # Valor por defecto si hay error
+        return 0  
 
 HTML_PAGINA = """
 <!DOCTYPE html>
@@ -76,7 +73,7 @@ HTML_PAGINA = """
 </head>
 <body>
     <div class="container">
-        <h1>🎨 Reconocedor de Dígitos</h1>
+        <h1> Reconocedor de Dígitos</h1>
         <div class="status" id="status">✅ Servidor funcionando</div>
         <canvas id="canvas" width="280" height="280"></canvas>
         <div>
