@@ -166,4 +166,3 @@ async def predecir(data: dict):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# No uses __main__ en Render - ellos manejan el servidor
